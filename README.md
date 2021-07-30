@@ -47,6 +47,12 @@ This tool will query SMU alumnus status in [ALMA](https://exlibrisgroup.com/prod
      * Update the ```TIME_ZONE``` if you are not in Singapore
    * Update the ```ALLOWED_HOSTS``` list in ```docker-compose-prod.yml```
 
+7. In Django Admin Panel
+    * Add in your [ALMA API](https://developers.exlibrisgroup.com/alma/apis/) with out it all entried will be considered non-member.
+    * Pagination default is 100 you can change it here too.
+    * No peak hours has been set by default. Put in the hour in military format in the database.
+
+
 # Credits
 The **html5-qrcode** barcode scanner used is from [mebjaz](https://github.com/mebjas) from this [repository](https://github.com/mebjas/html5-qrcode).
 
