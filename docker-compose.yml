@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+    app:
+        build:
+            context: .
+        ports:
+            - 8000:8000
+        volumes:
+            - ./Project-Directory:/app
+        command: >
+            sh -c  "python manage.py makemigrations && 
+                    python manage.py migrate &&
+                    python manage.py createsuperuser_if_none_exist --user=admin --password=password &&
+                    python manage.py usergroup --user=admin1 --group=adminGroup &&
+                    python manage.py usergroup --user=user1 --group=userGroup &&
+                    python manage.py runserver 0.0.0.0:8000"
+
+        environment:
+            - DEBUG=1
+
+        
+
+            

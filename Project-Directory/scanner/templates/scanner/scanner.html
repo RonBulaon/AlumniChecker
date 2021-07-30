@@ -1,0 +1,155 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>{{ sitewide.sitename }}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}"rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+<script type="text/javascript">
+  function submitThis(){
+    x = document.getElementById("barcode").value;
+    document.getElementById("submitButton").onclick = function () {
+      if (x){
+        location.href = "visitor/".concat(x);
+      } else {
+        location.reload();
+      }
+    };
+  }
+    
+    function init() {
+      // Clear forms here
+      document.getElementById("barcode").value = "";
+    }
+    window.onload = init;
+  </script>
+<script src="{% static 'html5-qrcode.min.js' %}"></script>
+
+<script>
+  function docReady(fn) {
+      // see if DOM is already available
+      if (document.readyState === "complete"
+          || document.readyState === "interactive") {
+          // call on next available tick
+          setTimeout(fn, 1);
+      } else {
+          document.addEventListener("DOMContentLoaded", fn);
+      }
+  }
+
+  docReady(function () {
+      var resultContainer = document.getElementById('qr-reader-results');
+      var lastResult, countResults = 0;
+      function onScanSuccess(decodedText, decodedResult) {
+          if (decodedText !== lastResult) {
+              ++countResults;
+              lastResult = decodedText;
+              // Handle on success condition with the decoded message.
+              console.log(`Scan result ${decodedText}`, decodedResult);
+              // console.log(decodedText);
+              window.location.href = 'visitor/'.concat(`${decodedText}`); 
+          }
+      }
+
+      var html5QrcodeScanner = new Html5QrcodeScanner(
+          "qr-reader", { fps: 10, qrbox: 250 });
+      html5QrcodeScanner.render(onScanSuccess);
+  });
+</script>
+   
+  </head>
+  <body>
+    
+<main>
+  <nav class="py-2 bg-light border-bottom">
+    <div class="container d-flex flex-wrap">
+      <ul class="nav me-auto">
+        <li class="nav-item"><a href="{% url 'scanner' %}" class="nav-link link-dark px-2">Scanner</a></li>
+        <li class="nav-item"><a href="{% url 'filter' %}" class="nav-link link-dark px-2">Filter</a></li>
+      </ul>
+      <ul class="nav">
+        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link link-dark px-2">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="border-bottom">
+    <div class="container">
+      <header>
+        <div class="d-flex flex-column flex-md-row align-items-center mb-1">
+          <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <span class="fs-2"><strong>[R]</strong></span>&nbsp;<span class="fs-4">{{ sitewide.sitename }}</span>
+          </a>
+    
+          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <div class="me-3 py-2 text-dark text-decoration-none" href="#">Username&nbsp;:&nbsp;<strong>{{ request.user}}</strong></div>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+  </div>
+
+  <div class="container py-4">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }}" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+<!-- cnew content starts here -->
+    
+<main class="container">
+  <div class="card">
+    <div class="card-header">
+      Option 1 : Follow Instructions Below!
+    </div>
+    <div class="card-body fw-normal">
+      <div id="qr-reader" ></div>
+      <div id="qr-reader-results"></div>
+    </div>
+  </div>
+  <br />
+  <div class="card">
+    <div class="card-header">
+      Option 2 : Type the Barcode and Submit!
+    </div>
+    <div class="card-body fw-normal">
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Barcode here!" id="barcode" onfocus="this.value=''">
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitButton" onclick="submitThis()">Submit</button>
+    </div>    
+  </div>
+</main>
+
+
+<!-- nee content end here -->
+    <footer class="pt-3 mt-4 text-muted border-top">
+      &copy; 2021
+    </footer>
+  </div>
+</main>
+  </body>
+</html>
