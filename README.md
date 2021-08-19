@@ -1,5 +1,5 @@
 # Alumni Checker
-This tool will query SMU alumnus status in [ALMA](https://exlibrisgroup.com/products/alma-library-services-platform/) through an API. The ID barcode can either be scanned or manually inputed. Powered by [Django](https://www.djangoproject.com/) Python web framweork and [PostGres](https://www.postgresql.org/) and containerized in [Docker](https://www.docker.com/), with [Nginx](https://www.nginx.com/) as reverse proxy with HTTPS enabled.
+This tool will query SMU alumnus status from [ALMA](https://exlibrisgroup.com/products/alma-library-services-platform/) through Alma REST API. The ID barcode can either be scanned or manually inputed. Powered by [Django](https://www.djangoproject.com/) Python web framweork and [PostGres](https://www.postgresql.org/) and containerized in [Docker](https://www.docker.com/), with [Nginx](https://www.nginx.com/) as reverse proxy with HTTPS enabled.
 
 
 # Features
@@ -58,4 +58,4 @@ The **html5-qrcode** barcode scanner used is from [mebjaz](https://github.com/me
 
 
 # License 
-Copyright 2021 *Ron Bulaon*
+Copyright 2021 **Ron Bulaon**
