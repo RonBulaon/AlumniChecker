@@ -58,4 +58,4 @@ The **html5-qrcode** barcode scanner used is from [mebjaz](https://github.com/me
 
 
 # License 
-Copyright [2021] [Ron Bulaon]
+Copyright 2021 *Ron Bulaon*
